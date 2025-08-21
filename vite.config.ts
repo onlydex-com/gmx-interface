@@ -50,16 +50,19 @@ export default defineConfig(({ mode }) => {
     build: {
       assetsInlineLimit: 0,
       outDir: "build",
-      sourcemap: true,
+      sourcemap: false,
       rollupOptions: {
         output: {
           manualChunks: {
             web3: ["ethers", "viem", "date-fns", "@rainbow-me/rainbowkit", "lodash", "@gelatonetwork/relay-sdk"],
             charts: ["recharts"],
             ui: ["@headlessui/react", "framer-motion", "react-select", "react-icons"],
+            vendor: ["react", "react-dom"]
           },
         },
+        maxParallelFileOps: 2,
       },
+      chunkSizeWarningLimit: 1000,
     },
     test: {
       environment: "happy-dom",
